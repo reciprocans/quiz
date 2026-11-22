@@ -1,0 +1,16 @@
+# Für Portainer > Stacks > Repository. Image wird automatisch von GitHub Actions gebaut.
+services:
+  quiz-battle:
+    image: ${QUIZ_IMAGE:?QUIZ_IMAGE muss z.B. ghcr.io/deinname/quiz-battle:latest sein}
+    pull_policy: always
+    restart: unless-stopped
+    ports:
+      - "${QUIZ_PORT:-1821}:3000"
+    environment:
+      ADMIN_KEY: ${ADMIN_KEY:?Bitte einen sicheren ADMIN_KEY setzen}
+      PORT: "3000"
+      DATA_DIR: /app/data
+    volumes:
+      - quiz_data:/app/data
+volumes:
+  quiz_data:

@@ -1,0 +1,12 @@
+services:
+  quiz-battle:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "1821:3000"
+    environment:
+      ADMIN_KEY: ${ADMIN_KEY:?Bitte ADMIN_KEY setzen}
+    volumes:
+      - quiz_data:/app/data
+volumes:
+  quiz_data:
